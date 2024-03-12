@@ -1,45 +1,117 @@
 import logo from './logo.svg';
 import './App.css';
-import {
+import React, { useState } from "react";
+import { Container, Row, Col, Button, FormControl,Card,ListGroup } from "react-bootstrap";
+import Carousel from 'react-bootstrap/Carousel';
 
-  Card,
-  ListGroup,
 
-  } from "react-bootstrap";
-
-  const Doctor ={
-    name: 'James Stron',
-    age: '49',
-    specialization: 'Cardiologist',
-    place:'St. Mary General Hospital',
+  const Rose ={
+    info1: 'James Stron',
+    info2:'',
+    info3:''
+    
     
 }
+function InputOutputField() {
+  const [inputText, setInputText] = useState("");
+  const [outputText, setOutputText] = useState("");
 
+  const textChange = (e) => {
+    setInputText(e.target.value);
+    setOutputText(e.target.value);
+  };
 
-function DoctorCard() {
+  const fieldsClear = () => {
+    setInputText("");
+    setOutputText("");
+  };
+
   return (
-    <center>
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="https://www.garant.ru/files/7/0/1291507/v-zemskie-doktora-smogut-poyti-vrachi-predpensionnogo-vozrasta_200.jpg" />
-      <Card.Body>
-        <Card.Title></Card.Title>
-        <Card.Text>
-        There is no point in saying that medicine plays an important role in the lives of all people.
-        </Card.Text>
-      </Card.Body>
-      <ListGroup className="list-group-flush">
-        <ListGroup.Item>Name: {Doctor.name}</ListGroup.Item>
-        <ListGroup.Item>Specialization: {Doctor.specialization}</ListGroup.Item>
-        <ListGroup.Item>Age: {Doctor.age}</ListGroup.Item>
-        <ListGroup.Item>{Doctor.place}</ListGroup.Item>
-      </ListGroup>
-      <Card.Body>
-        <Card.Link href="https://www.smgh.ca/">Link</Card.Link>
-        
-      </Card.Body>
-    </Card>
-    </center>
+    <Container>
+      <Row className="my-3">
+        <Col>
+          <FormControl
+            type="text"
+            placeholder="Розы рамблер - топ!"
+            value={inputText}
+            onChange={textChange}
+          />
+        </Col>
+      </Row>
+      <Row className="my-3">
+        <Col>
+          <FormControl
+            type="text"
+            placeholder="Напишите, что розы рамблер - топ!"
+            value={outputText}
+            readOnly
+            disabled
+          />
+        </Col>
+      </Row>
+      <Row className="my-3">
+        <Col>
+          <Button variant="light" onClick={fieldsClear}>
+            Очистить
+          </Button>
+        </Col>
+      </Row>
+      <Row></Row>
+    </Container>
   );
 }
 
-export default DoctorCard;
+
+function Roses() {
+  return (
+    <Carousel data-bs-theme="dark">
+      <Carousel.Item >
+        <img
+        src="https://i.pinimg.com/736x/7d/b6/d3/7db6d36235a53caa14aa6a7b3eb1b3a8.jpg"
+          alt="First slide"
+          style={{ width: "900px", height: "700px" }} 
+        />
+       <Carousel.Caption style={{background:'white'}}>
+          <h3>Розы "Rambler"</h3>
+          <h5>используемые для украшения фасадов, архитектурных форм, пергол и райских садов</h5>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+      <img
+      src="https://cdn.mos.cms.futurecdn.net/LSZvZAos9WpKchbgF9U76K.jpg"
+      
+          alt="First slide"
+          style={{ width: "900px", height: "700px" }} 
+        />
+        <Carousel.Caption style={{background:'white'}}>
+          <h3>"Вьющиеся розы"</h3>
+          <h5>гибкие тонкие ветви плетистой розы, могут вырастать до 6 метров в длину. </h5>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+      <img
+          src="https://www.capegazette.com/sites/capegazette/files/2021/08/field/image/_--roses-Fleurs_de_Rosa_banksiae_'Lutea'-(1)-WIKIPEDIA.jpg"
+          alt="First slide"
+          style={{ width: "900px", height: "700px" }} 
+        />
+        <Carousel.Caption style={{background:'white'}}>
+          <h3>Рамблеры oтличаются</h3>
+          <h5>
+          пышными, маленькими розовыми цветками, собранными в большие, красивые соцветия.
+          </h5>
+        </Carousel.Caption>
+      </Carousel.Item>
+    </Carousel>
+  );
+}
+
+function App() {
+  return (
+    <div className="App" >
+      <Roses/>
+      <InputOutputField />
+    </div>
+  );
+}
+
+export default App;
