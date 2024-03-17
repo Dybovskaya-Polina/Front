@@ -1,17 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
-import React, { useState } from "react";
-import { Container, Row, Col, Button, FormControl,Card,ListGroup } from "react-bootstrap";
+import React, { useState , useEffect} from "react";
+import { Container, Row, Col, Button, FormControl,Card,ListGroup, CardBody } from "react-bootstrap";
 import Carousel from 'react-bootstrap/Carousel';
+import plant from "./plant.json";
 
-
-  const Rose ={
-    info1: 'James Stron',
-    info2:'',
-    info3:''
-    
-    
-}
 function InputOutputField() {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
@@ -61,7 +53,6 @@ function InputOutputField() {
   );
 }
 
-
 function Roses() {
   return (
     <Carousel data-bs-theme="dark">
@@ -104,14 +95,67 @@ function Roses() {
     </Carousel>
   );
 }
-
 function App() {
   return (
     <div className="App" >
       <Roses/>
-      <InputOutputField />
+      <SearchPlants/>
+
     </div>
   );
 }
+const list = plant;
+
+function SearchPlants(){
+  const[searchTerm]= useState('');
+  const[setSearchTerm]= useState('');
+  const searchCards = list.filter(function (item){
+    return item.name.includes(searchTerm);
+  });
+
+  const handleChange = (event) =>
+  {
+    setSearchTerm(event.target.value);
+  }
+  
+  return (
+    <div>
+      <h1> What.....</h1>
+      <label htmlFor='search'>Search:</label>
+      <input id='search' type ='text' onChange={handleChange} style ={{marginTop:"40px", marginBottom:'40px'}}></input>
+      <p>Search for <strong>{searchTerm}</strong></p>
+      <ListPlant list ={searchCards}/>
+    </div>
+  )
+
+}
+const ListPlant =(props) =>{
+  return (
+    <div>
+      <Row>
+        {props.list.map(function(item)
+        {
+          return <Col key={item.id}>
+            <Card style={{ width: '18rem',height:'18rem', background: '#385c40', margin:'1rem'}}>
+              <Card.Body>
+                <Card.Title style ={{color:'white'}}><span style={{fontSize:'12px', textAlign: 'left' , textIndent:'3rem'}}>{item.id} </span>{item.name}</Card.Title>
+                <ListGroup>
+                  <ListGroup.Item><strong>Sience name:</strong>  {item.scientific_name}</ListGroup.Item>
+                  <ListGroup.Item> <strong>Family:</strong> {item.scientific_name}</ListGroup.Item>
+                  <ListGroup.Item> <strong>code:</strong> {item.code}</ListGroup.Item>
+                </ListGroup>
+              </Card.Body>
+            </Card>
+          </Col>
+        })}
+      </Row>
+    </div>
+  );
+}
+
+
+
+
+
 
 export default App;
