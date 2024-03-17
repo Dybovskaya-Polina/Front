@@ -98,7 +98,7 @@ function Roses() {
 function App() {
   return (
     <div className="App" >
-      <Roses/>
+     
       <SearchPlants/>
 
     </div>
@@ -107,24 +107,24 @@ function App() {
 const list = plant;
 
 function SearchPlants(){
-  const[searchTerm]= useState('');
-  const[setSearchTerm]= useState('');
+  
+  const[searchTerm,setSearchTerm]= useState('');
   const searchCards = list.filter(function (item){
-    return item.name.includes(searchTerm);
+    return item.name.toLowerCase().includes(searchTerm);
   });
 
   const handleChange = (event) =>
   {
     setSearchTerm(event.target.value);
   }
-  
+
   return (
     <div>
-      <h1> What.....</h1>
+      <h1 style={{marginBottom:'-1rem'}}> You can find a plant!!!</h1>
       <label htmlFor='search'>Search:</label>
-      <input id='search' type ='text' onChange={handleChange} style ={{marginTop:"40px", marginBottom:'40px'}}></input>
-      <p>Search for <strong>{searchTerm}</strong></p>
-      <ListPlant list ={searchCards}/>
+      <input style={{marginTop:'1rem',marginTop:"40px", marginBottom:'40px'}} id='search' type ='text' onChange={handleChange} ></input>
+      <p style={{marginTop:'-1rem'}}>Search for <strong>{searchTerm}</strong></p>
+      <ListPlant  list ={searchCards}/>
     </div>
   )
 
@@ -138,7 +138,7 @@ const ListPlant =(props) =>{
           return <Col key={item.id}>
             <Card style={{ width: '18rem',height:'18rem', background: '#385c40', margin:'1rem'}}>
               <Card.Body>
-                <Card.Title style ={{color:'white'}}><span style={{fontSize:'12px', textAlign: 'left' , textIndent:'3rem'}}>{item.id} </span>{item.name}</Card.Title>
+                <Card.Title style ={{color:'white'}}>{item.name}</Card.Title>
                 <ListGroup>
                   <ListGroup.Item><strong>Sience name:</strong>  {item.scientific_name}</ListGroup.Item>
                   <ListGroup.Item> <strong>Family:</strong> {item.scientific_name}</ListGroup.Item>
