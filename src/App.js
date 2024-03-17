@@ -137,9 +137,9 @@ const ListPlant =(props) =>{
         {
           return <Col key={item.id}>
             <Card style={{ width: '18rem',height:'18rem', background: '#385c40', margin:'1rem'}}>
-              <Card.Body>
+              <Card.Body style={{ minWidth: '15rem',minHeight:'16rem'}}>
                 <Card.Title style ={{color:'white'}}>{item.name}</Card.Title>
-                <ListGroup>
+                <ListGroup >
                   <ListGroup.Item><strong>Sience name:</strong>  {item.scientific_name}</ListGroup.Item>
                   <ListGroup.Item> <strong>Family:</strong> {item.scientific_name}</ListGroup.Item>
                   <ListGroup.Item> <strong>code:</strong> {item.code}</ListGroup.Item>
