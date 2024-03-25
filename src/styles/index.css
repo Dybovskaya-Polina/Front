@@ -1,0 +1,20 @@
+.family{
+    display: inline-block;
+    background-color: rgb(0, 185, 185);
+    border-radius: 30px;
+    padding: 10px 20px;
+    margin-bottom: 25px;
+    margin-right: 10px;
+    color: white;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 500ms ease;
+
+
+}
+.family:hover{
+    border-color: aliceblue;
+    transform: scale(1.1);
+
+
+}

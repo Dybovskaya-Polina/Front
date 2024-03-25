@@ -1,9 +1,10 @@
 import './App.css';
 import React, { useState , useEffect} from "react";
-import { Container, Row, Col, Button, FormControl,Card,ListGroup, CardBody } from "react-bootstrap";
+import { Container, NavDropdown ,Row, Col,Navbar,Form, Button,FormLabel, FormControl,Card,ListGroup, CardBody, FormSelect } from "react-bootstrap";
 import Carousel from 'react-bootstrap/Carousel';
 import plant from "./plant.json";
 
+import './styles/index.css'
 function InputOutputField() {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
@@ -52,6 +53,9 @@ function InputOutputField() {
     </Container>
   );
 }
+
+
+
 
 function Roses() {
   return (
@@ -105,43 +109,84 @@ function App() {
   );
 }
 const list = plant;
+const list1= [{family: 'Fabaceae'},{family:'Rosaceae'}];
 
 function SearchPlants(){
   
   const[searchTerm,setSearchTerm]= useState('');
-  const searchCards = list.filter(function (item){
-    return item.name.toLowerCase().includes(searchTerm);
-  });
+  const[filterTerm,setFilterTerm]=useState('');
 
   const handleChange = (event) =>
   {
     setSearchTerm(event.target.value);
   }
+  const filterChange = (event) =>
+  {
+    
+    setFilterTerm(event.target.value);
+  }
+
+  const searchCards = list.filter(function (item){
+    return  filterTerm!='' ? item.name.includes(searchTerm) & item.family ==filterTerm: item.name.includes(searchTerm);
+  });
+
+  const families = Array.from(new Set(list.map(function(item){
+    return item.family;
+  })));
+
+
+
 
   return (
     <div>
-      <h1 style={{marginBottom:'-1rem'}}> You can find a plant!!!</h1>
-      <label htmlFor='search'>Search:</label>
-      <input style={{marginTop:'1rem',marginTop:"40px", marginBottom:'40px'}} id='search' type ='text' onChange={handleChange} ></input>
-      <p style={{marginTop:'-1rem'}}>Search for <strong>{searchTerm}</strong></p>
-      <ListPlant  list ={searchCards}/>
-    </div>
-  )
+      <Navbar className="bg-body-tertiary justify-content-between" style={{marginLeft:'20px'}}>
+        <Form >
+          <Row>
+            <Col xs="auto">
+              <Form.Control
+                type="text"
+                placeholder="Search"
+                className=" mr-sm-2"
+                id='search' 
+                onChange={handleChange}
+              />
+              
+            </Col>
+            
+            </Row>
+            
+        </Form>
+        <Form >
+        <FormSelect aria-label='diff' style={{width:'300px'}}onChange ={filterChange} >
 
+        <ListFamily list={families}/>
+        </FormSelect>
+        
+        
+</Form>
+        
+      </Navbar>
+      
+      <ListPlant  list ={searchCards}/>
+      
+    </div>
+  )  
+  
 }
+
 const ListPlant =(props) =>{
   return (
-    <div>
-      <Row>
+    <div >
+      <Row >
         {props.list.map(function(item)
         {
           return <Col key={item.id}>
-            <Card style={{ width: '18rem',height:'18rem', background: '#385c40', margin:'1rem'}}>
+            <Card style={{ width: '18rem',height:'18rem', background: '#385c40', margin:'1rem',alignContent: 'flex-end'}}>
               <Card.Body style={{ minWidth: '15rem',minHeight:'16rem'}}>
                 <Card.Title style ={{color:'white'}}>{item.name}</Card.Title>
                 <ListGroup >
                   <ListGroup.Item><strong>Sience name:</strong>  {item.scientific_name}</ListGroup.Item>
-                  <ListGroup.Item> <strong>Family:</strong> {item.scientific_name}</ListGroup.Item>
+                  <ListGroup.Item> <strong>Family:</strong> {item.family}</ListGroup.Item>
                   <ListGroup.Item> <strong>code:</strong> {item.code}</ListGroup.Item>
                 </ListGroup>
               </Card.Body>
@@ -153,9 +198,15 @@ const ListPlant =(props) =>{
   );
 }
 
-
-
-
+const ListFamily = (props) =>{
+  return (
+    <>
+    {props.list.map(function(item){
+      return <option className='family'>{item}</option>
+    })}
+</>
+  );
+}
 
 
 export default App;
