@@ -8,6 +8,7 @@ import './styles/index.css'
 function InputOutputField() {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
+  
 
   const textChange = (e) => {
     setInputText(e.target.value);
@@ -99,22 +100,32 @@ function Roses() {
     </Carousel>
   );
 }
-function App() {
-  return (
-    <div className="App" >
-     
-      <SearchPlants/>
 
-    </div>
-  );
-}
 const list = plant;
 const list1= [{family: 'Fabaceae'},{family:'Rosaceae'}];
 
 function SearchPlants(){
   
+  const useStorageState = (initState) =>{
+    const [loginTerm,setLoginTerm] =useState(localStorage.getItem('login') || initState);
+
+    useEffect(() =>{
+      localStorage.setItem('login',loginTerm);
+    },[loginTerm] );
+    
+    return [loginTerm,setLoginTerm]; 
+ }
+  
   const[searchTerm,setSearchTerm]= useState('');
   const[filterTerm,setFilterTerm]=useState('');
+  const [loginTerm, setLogin] = useStorageState('default');
+  console.log(loginTerm)
+  
+  const loginChange = (event) =>
+  {
+    console.log('infa')
+    setLogin(event.target.value);
+  }
 
   const handleChange = (event) =>
   {
@@ -125,9 +136,9 @@ function SearchPlants(){
     
     setFilterTerm(event.target.value);
   }
-
+ 
   const searchCards = list.filter(function (item){
-    return  filterTerm!='' ? item.name.includes(searchTerm) & item.family ==filterTerm: item.name.includes(searchTerm);
+    return  filterTerm!='' ? item.name.toLowerCase().includes(searchTerm.toLowerCase()) & item.family ==filterTerm: item.name.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
   const families = Array.from(new Set(list.map(function(item){
@@ -150,21 +161,28 @@ function SearchPlants(){
                 id='search' 
                 onChange={handleChange}
               />
-              
             </Col>
-            
             </Row>
-            
+            </Form>
+            <Form>
+            <Row>
+            <Col xs="auto">
+              <Form.Control
+                type="text"
+                placeholder="Login"
+                className=" mr-sm-2"
+                id='search' 
+                onChange={loginChange}
+              />
+            </Col>
+            </Row>
         </Form>
         <Form >
-        <FormSelect aria-label='diff' style={{width:'300px'}}onChange ={filterChange} >
-
+        <FormSelect aria-label='Choose family' style={{width:'300px'}} onChange ={filterChange} >
+          <option value=''>Choose family</option>
         <ListFamily list={families}/>
         </FormSelect>
-        
-        
-</Form>
-        
+      </Form>
       </Navbar>
       
       <ListPlant  list ={searchCards}/>
@@ -208,5 +226,13 @@ const ListFamily = (props) =>{
   );
 }
 
+function App() {
+  return (
+    <div className="App" >
+     
+      <SearchPlants/>
 
+    </div>
+  );
+}
 export default App;
