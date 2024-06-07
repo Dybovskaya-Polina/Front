@@ -1,10 +1,101 @@
 import './App.css';
-import React, { useState , useEffect} from "react";
-import { Container, NavDropdown ,Row, Col,Navbar,Form, Button,FormLabel, FormControl,Card,ListGroup, CardBody, FormSelect } from "react-bootstrap";
-import Carousel from 'react-bootstrap/Carousel';
-import plant from "./plant.json";
-
+import React, { useState} from "react";
+import Info from './comp/weather';
+import Form from './comp/forms';
 import './styles/index.css'
+import Card from 'react-bootstrap/Card';
+import Carousel from 'react-bootstrap/Carousel';
+import A from './comp/All';
+import Basic from './comp/try';
+import ListGroup from 'react-bootstrap/ListGroup';
+import CurrentWeather from './comp/try';
+import Weather from './comp/main';
+class App extends React.Component {
+
+  state ={
+    url:'https://img.freepik.com/free-vector/winter-blue-and-pink-gradient-background-vector_53876-117276.jpg?size=626&ext=jpg&ga=GA1.1.1908636980.1711929600&semt=ais',
+    icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2jGIDAIDZPGHKtrUWlpBe7Pt6Jgm1BFIT8ChJdsH3ew&s',
+    temp: 'C K F',
+    city: 'Your City',
+    country: '',
+    weather: 'Future Weather',
+    error: ""
+  }
+  
+  getWeather = async(e) =>{
+    e.preventDefault()
+    const city=e.target.elements.city.value;
+    const mykey="wknd9Mybx73oyaPD0urLsS4vuaOJXM1qUv3VH3H0G-I"
+
+    const api_url_img = await 
+    fetch(`https://api.unsplash.com/search/photos?page=1&query=${city}&client_id=${mykey}`);
+    const dataimg = await api_url_img.json();
+    
+    console.log(dataimg);  
+    console.log(dataimg.results[0].urls.raw);  
+    let iconBaseUrl = "http://openweathermap.org/img/wn/";
+    let iconFormat = ".png";
+
+    if (city){
+    const api_url = await 
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=c6b109647c17a64b46e9013cea5fdbb6`);
+    const data = await api_url.json();
+    console.log(data);  
+
+    this.setState({
+      icon:  iconBaseUrl + data.weather[0].icon + iconFormat,
+      url:dataimg.results[0].urls.raw,
+      temp:data.main.temp,
+      city:data.name,
+      country: data.sys.country,
+      weather:data.weather[0].description,
+      error: undefined
+    })
+    const ccity=city
+
+
+  }else{
+    console.log("error")
+    this.setState({
+      icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2jGIDAIDZPGHKtrUWlpBe7Pt6Jgm1BFIT8ChJdsH3ew&s',
+      url:'https://img.freepik.com/free-vector/winter-blue-and-pink-gradient-background-vector_53876-117276.jpg?size=626&ext=jpg&ga=GA1.1.1908636980.1711929600&semt=ais',
+      temp:  '273.15',
+      city: 'Moscow',
+      country: 'Ru',
+      weather: 'You can know',
+      error: "Write a city"
+    });
+  }
+  
+}
+
+  render(){
+
+    
+    return (
+      
+      <div >
+        
+        <Form weatherMethod={this.getWeather} />
+
+        <Weather
+         image={this.state.url} 
+         icon={this.state.icon}
+         temp={this.state.temp} 
+         city={this.state.city} 
+         country={this.state.country}
+         weather={this.state.weather}
+         />
+      </div>
+
+      
+  );
+  }
+}
+export default App;
+
+
+/*
 function InputOutputField() {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
@@ -58,48 +149,7 @@ function InputOutputField() {
 
 
 
-function Roses() {
-  return (
-    <Carousel data-bs-theme="dark">
-      <Carousel.Item >
-        <img
-        src="https://i.pinimg.com/736x/7d/b6/d3/7db6d36235a53caa14aa6a7b3eb1b3a8.jpg"
-          alt="First slide"
-          style={{ width: "900px", height: "700px" }} 
-        />
-       <Carousel.Caption style={{background:'white'}}>
-          <h3>Розы "Rambler"</h3>
-          <h5>используемые для украшения фасадов, архитектурных форм, пергол и райских садов</h5>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-      <img
-      src="https://cdn.mos.cms.futurecdn.net/LSZvZAos9WpKchbgF9U76K.jpg"
-      
-          alt="First slide"
-          style={{ width: "900px", height: "700px" }} 
-        />
-        <Carousel.Caption style={{background:'white'}}>
-          <h3>"Вьющиеся розы"</h3>
-          <h5>гибкие тонкие ветви плетистой розы, могут вырастать до 6 метров в длину. </h5>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-      <img
-          src="https://www.capegazette.com/sites/capegazette/files/2021/08/field/image/_--roses-Fleurs_de_Rosa_banksiae_'Lutea'-(1)-WIKIPEDIA.jpg"
-          alt="First slide"
-          style={{ width: "900px", height: "700px" }} 
-        />
-        <Carousel.Caption style={{background:'white'}}>
-          <h3>Рамблеры oтличаются</h3>
-          <h5>
-          пышными, маленькими розовыми цветками, собранными в большие, красивые соцветия.
-          </h5>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
-  );
-}
+
 
 const list = plant;
 const list1= [{family: 'Fabaceae'},{family:'Rosaceae'}];
@@ -225,14 +275,4 @@ const ListFamily = (props) =>{
 </>
   );
 }
-
-function App() {
-  return (
-    <div className="App" >
-     
-      <SearchPlants/>
-
-    </div>
-  );
-}
-export default App;
+*/
