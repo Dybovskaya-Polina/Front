@@ -12,16 +12,23 @@ const Weather = ( props) => {
         <div className="container_content">
         <div className="container_content_inner">
           <div className="title">
-          <h1>Погода</h1>
+          <h2>The wheather in </h2>
+          <h1>{props.city}, {props.country}</h1>
           </div>
         <div className="par">
         <h3>
         <div>
-          <p>{props.city},{props.country}</p>
-          <p>{props.weather}</p>
-          <p>{Math.round(props.temp - 273.15)}C</p>
+          <p>{(props.weather)[0].toUpperCase()+(props.weather).slice(1)}</p>
+          <img
+          alt="weather"
+          className="weather-icon"
+          img src={props.icon} 
+          />
+          <p>Tempreture:  {Math.round(props.temp - 273.15)} °C</p>
+          <p></p>
         </div>
         </h3>
+        <h2></h2>
         </div>
         </div>
         </div>

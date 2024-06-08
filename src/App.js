@@ -14,9 +14,9 @@ export default function App () {
   const [state, setState] = useState({
       url:'https://img.freepik.com/free-vector/winter-blue-and-pink-gradient-background-vector_53876-117276.jpg?size=626&ext=jpg&ga=GA1.1.1908636980.1711929600&semt=ais',
       icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2jGIDAIDZPGHKtrUWlpBe7Pt6Jgm1BFIT8ChJdsH3ew&s',
-      temp: 'C K F',
+      temp: 20,
       city: 'Your City',
-      country: '',
+      country: 'your country',
       weather: 'Future Weather',
       error: "",
       id: null
@@ -29,8 +29,15 @@ export default function App () {
   async function getWeather({city, categoryTemp} = {city : 'Moscow', categoryTemp : 'temp'}){
 
     const [img, weather] = await Promise.all([api.getImg(city), api.getWeather(city)])
-    setState((prev) => ({...prev, url : img.results[0].urls.full, temp: weather.main[categoryTemp], id: weather.id}))
-    console.log( img, weather);
+    setState((prev) => ({...prev,
+      url : img.results[0].urls.full, 
+      temp: weather.main[categoryTemp], 
+      id: weather.id, 
+      city: weather.name, 
+      country: weather.sys.country,
+      weather: weather.weather[0].description, 
+      icon: "http://openweathermap.org/img/wn/"+weather.weather[0].icon+'.png'}))
+    console.log( img, weather,state.icon,state.temp);
   }
 
 
@@ -39,11 +46,13 @@ export default function App () {
     <Form getWeather={getWeather}/>
     <Weather
     image={state.url} 
+    icon={state.icon} 
     temp={state.temp} 
     city={state.city} 
     country={state.country}
     weather={state.weather}
     id={state.id}
+    t={state.t}
     />
 </div>
 

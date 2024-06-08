@@ -8,6 +8,11 @@
     --secondary-color: #000000;
 
   }
+  .weather-icon{
+    height: 90px;
+    
+
+  }
   .overlay {
     position: fixed;
     top: 0;
@@ -16,20 +21,23 @@
     bottom: 0;
     height: 100%;
     z-index: -10;
-    background-color: var(--contrast-color);
+
   }
   
   .container {
+    max-width: 800px;
+    background: #d7f0ec;
+    width: 800px;
+    padding: 25px 40px 20px 40px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     display: flex;
     height: 500px;
-    width: 650px;
     justify-content: space-around;
     align-items: center;
     color:black;
     animation: expand .8s ease forwards;
-    background-color:black;
     position: relative;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
     transition: all .8s ease;
   }
   
@@ -38,11 +46,11 @@
   }
   
   .container_content_inner {
-    margin-left: 30px;
+    margin-left: 20px;
   }
   
   .container_outer_img {
-    margin: 30px;
+    margin: 20px;
     width: 350px;
     overflow: hidden;
   }
@@ -63,23 +71,10 @@
     transform: translateY(300px);
     animation: slideUp .8s ease-in-out forwards .8s;
   }
-  
-  .btns {
-    height: 100%;
-    position: relative;
-    width: 150px;
-    overflow: hidden;
-  }
-  
-  
-  .title {
-    overflow: hidden;
-    height: auto;
-  }
-  
+
   h1 {
       font-size: 40px;
-      color: var(--contrast-color);
+
       margin-bottom: 20px;
       transform: translateY(100px);
       animation: slideUp .8s ease forwards .5s;
