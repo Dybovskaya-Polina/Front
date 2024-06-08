@@ -25,7 +25,7 @@ class App extends React.Component {
   getWeather = async(e) =>{
     e.preventDefault()
     const city=e.target.elements.city.value;
-    const mykey="wknd9Mybx73oyaPD0urLsS4vuaOJXM1qUv3VH3H0G-I"
+    const mykey="-I"
 
     const api_url_img = await 
     fetch(`https://api.unsplash.com/search/photos?page=1&query=${city}&client_id=${mykey}`);
