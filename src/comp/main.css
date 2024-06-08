@@ -9,7 +9,7 @@
 
   }
   .overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -21,8 +21,8 @@
   
   .container {
     display: flex;
-    height: 400px;
-    width: 500px;
+    height: 500px;
+    width: 650px;
     justify-content: space-around;
     align-items: center;
     color:black;
@@ -34,17 +34,16 @@
   }
   
   .container_content {
-   width: 250px;
+   width: 300px;
   }
   
   .container_content_inner {
-    width: 350px;
     margin-left: 30px;
   }
   
   .container_outer_img {
     margin: 30px;
-    width: 300px;
+    width: 350px;
     overflow: hidden;
   }
   
