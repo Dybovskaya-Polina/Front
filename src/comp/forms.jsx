@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import "./main.css";
-import "./form.css";
+import "../styles/main.css";
+import'../styles/form.css'
 
 function Form ({getWeather}) {
 

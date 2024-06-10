@@ -1,7 +1,14 @@
 ### A brief weather forecast
 Users of this project get access to the OpenweathermapApi to get information about the weather in the city
 
-### Available scripts
+### Start
+Installing and launching the application
+
+https://github.com/FicusPlol/Front.git
+Clone the repository to your device
+npm install
+
+Install dependencies
 In the project catalog, you can enter this command to see the main page:
 npm start
 

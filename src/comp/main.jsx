@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./main.css";
+import React from "react";
+import'../styles/main.css';
 
 function Weather (props) {
 
