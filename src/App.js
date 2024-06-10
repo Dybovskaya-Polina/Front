@@ -2,9 +2,6 @@ import './App.css';
 import React, { useEffect, useState} from "react";
 import Form from './comp/forms';
 import './styles/index.css'
-import Card from 'react-bootstrap/Card';
-import Carousel from 'react-bootstrap/Carousel';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Weather from './comp/main';
 import { api } from './api';
 
@@ -19,7 +16,8 @@ export default function App () {
       country: 'your country',
       weather: 'Future Weather',
       error: "",
-      id: null
+      wind: '',
+      humidity:''
   })
 
   useEffect(()=> {
@@ -29,6 +27,7 @@ export default function App () {
   async function getWeather({city, categoryTemp} = {city : 'Moscow', categoryTemp : 'temp'}){
 
     const [img, weather] = await Promise.all([api.getImg(city), api.getWeather(city)])
+
     setState((prev) => ({...prev,
       url : img.results[0].urls.full, 
       temp: weather.main[categoryTemp], 
@@ -36,8 +35,10 @@ export default function App () {
       city: weather.name, 
       country: weather.sys.country,
       weather: weather.weather[0].description, 
-      icon: "http://openweathermap.org/img/wn/"+weather.weather[0].icon+'.png'}))
-    console.log( img, weather,state.icon,state.temp);
+      icon: "http://openweathermap.org/img/wn/"+weather.weather[0].icon+'.png',
+      wind:weather.wind.speed,
+      humidity: weather.main.humidity
+      }))
   }
 
 
@@ -45,14 +46,14 @@ export default function App () {
   return <div>
     <Form getWeather={getWeather}/>
     <Weather
-    image={state.url} 
-    icon={state.icon} 
-    temp={state.temp} 
-    city={state.city} 
-    country={state.country}
-    weather={state.weather}
-    id={state.id}
-    t={state.t}
+      image={state.url} 
+      icon={state.icon} 
+      temp={state.temp} 
+      city={state.city} 
+      country={state.country}
+      weather={state.weather}
+      wind={state.wind}
+      humidity={state.humidity}
     />
 </div>
 

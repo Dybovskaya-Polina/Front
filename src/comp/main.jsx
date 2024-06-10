@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import "./main.css";
 
+function Weather (props) {
 
-const Weather = ( props) => {
-
-
-  const tempp =Math.round(Number(props.temp) - 273.15)
   return (
     <div>
         <div className= 'container'>
@@ -25,7 +22,8 @@ const Weather = ( props) => {
           img src={props.icon} 
           />
           <p>Tempreture:  {Math.round(props.temp - 273.15)} °C</p>
-          <p></p>
+          <p>Wind: {props.wind} m/s</p>
+          <p>Humidity: {props.humidity}%</p>
         </div>
         </h3>
         <h2></h2>

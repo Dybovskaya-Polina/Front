@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import "./main.css";
-
+import "./form.css";
 
 function Form ({getWeather}) {
 
   const [value, setValue] = useState('Moscow')
-  const [select, setSelect] = useState(1)
+  const [select, setSelect] = useState('temp')
 
   async function handleSubmit(e){
     e.preventDefault()
@@ -14,17 +14,17 @@ function Form ({getWeather}) {
   }
    
   return (
-    <div className="container" style={{ height:'70px',backgroundColor:'black', alignItems:'center'}}>
+    <div className="container base">
       <div style={{alignItems:'center'}}>
       <form onSubmit ={handleSubmit}  >
-          <input style={{fontSize:'20px'}} type ='text' value={value} onInput={(e) => setValue(e.target.value)} name='city' placeholder='City'/>
-          <select style={{fontSize:'20px'}} defaultValue="temp" name="" id="" onChange={(e) => setSelect(e.target.value)}>
+          <input className='text-search' type ='text' value={value} onInput={(e) => setValue(e.target.value)} name='city' placeholder='City'/>
+          <select className='text-search' defaultValue="temp" onChange={(e) => setSelect(e.target.value)}>
             <option value="temp">Average</option>
             <option value="temp_min">Minimum</option>
             <option value="temp_max">Maximum</option>
             <option value="feels_like">Feels like</option>
           </select>
-          <button style={{backgroundColor:'white',color:'black',fontSize:'20px'}}> Get Info</button>
+          <button className='button'> Get Info</button>
         </form>
       </div>
     </div>

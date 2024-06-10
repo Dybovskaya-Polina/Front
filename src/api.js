@@ -1,10 +1,9 @@
 class Api {
     mykey = "wknd9Mybx73oyaPD0urLsS4vuaOJXM1qUv3VH3H0G-I"
-  
-
-
+    key = 'c6b109647c17a64b46e9013cea5fdbb6'
+    
     async getWeather(city){
-        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=c6b109647c17a64b46e9013cea5fdbb6`);
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.key}`);
         const data = await res.json()
         return data
         }
@@ -17,7 +16,7 @@ class Api {
     }
 
     async getWeatherDays(id){
-        const res = await fetch(`https://pro.openweathermap.org/data/2.5/forecast/hourly?id=${id}&appid=c6b109647c17a64b46e9013cea5fdbb6`)
+        const res = await fetch(`https://pro.openweathermap.org/data/2.5/forecast/hourly?id=${id}&appid=${this.key}`)
         const data = await res.json()
         return data
     }
