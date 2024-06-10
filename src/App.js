@@ -27,7 +27,7 @@ export default function App () {
 
     const [img, weather] = await Promise.all([api.getImg(city), api.getWeather(city)])
 
-    setState((prev) => ({...prev,
+    setState ({
       url : img.results[0].urls.full, 
       temp: weather.main[categoryTemp], 
       id: weather.id, 
@@ -37,7 +37,7 @@ export default function App () {
       icon: "http://openweathermap.org/img/wn/"+weather.weather[0].icon+'.png',
       wind:weather.wind.speed,
       humidity: weather.main.humidity
-      }))
+      })
   }
 
 
