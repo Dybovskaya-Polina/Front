@@ -19,11 +19,11 @@ function Forma ({getWeather}) {
    
   return (
     <div className="container base" style={{}}>
-      <div style={{alignItems:'center'}}>
+      <div className='universe'>
       <form onSubmit ={handleSubmit}  >
       <Row>
       <Col>
-      <InputGroup style={{alignItems:'center',margin:'1em'}}   className="mb-3">
+      <InputGroup className="input mb-3">
         <Form.Control  value={value} onInput={(e) => setValue(e.target.value)} name='city' placeholder='City'
           aria-label="Small"
           aria-describedby="inputGroup-sizing-sm"
@@ -31,7 +31,7 @@ function Forma ({getWeather}) {
       </InputGroup>
           </Col>
           <Col>
-          <Form.Select  style={{alignItems:'center',margin:'1em'}} defaultValue="temp" onChange={(e) => setSelect(e.target.value)}>
+          <Form.Select className='input' defaultValue="temp" onChange={(e) => setSelect(e.target.value)}>
             <option value="temp">Average</option>
             <option value="temp_min">Minimum</option>
             <option value="temp_max">Maximum</option>
@@ -39,7 +39,7 @@ function Forma ({getWeather}) {
           </Form.Select>
           </Col>
           <Col> 
-          <Button variant="outline-light"  type="submit" style={{alignItems:'center',margin:'1em'}} >Get Info</Button>
+          <Button variant="outline-light"  type="submit" className='input'>Get Info</Button>
           </Col>
           </Row>
         </form>

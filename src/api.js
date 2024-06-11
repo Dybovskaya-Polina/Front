@@ -15,8 +15,8 @@ class Api {
         return data
     }
 
-    async getWeatherDays(id=1){
-        const res = await fetch(`https://pro.openweathermap.org/data/2.5/forecast/hourly?id=${id}&appid=${this.key}`)
+    async getWeatherDays(city='Moscow'){
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Moscow&appid=${this.mykey}`)
         const data = await res.json()
         console.log(data)
         return data
