@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from "react";
-import Form from './comp/forms';
+import Forma from './comp/forms';
 import './styles/index.css'
 import Weather from './comp/main';
 import { api } from './api';
@@ -25,7 +25,7 @@ export default function App () {
 
   async function getWeather({city, categoryTemp} = {city : 'Moscow', categoryTemp : 'temp'}){
 
-    const [img, weather] = await Promise.all([api.getImg(city), api.getWeather(city)])
+    const [img, weather] = await Promise.all([api.getImg(city), api.getWeather(city),api.getWeatherDays(1)])
 
     setState ({
       url : img.results[0].urls.full, 
@@ -43,7 +43,7 @@ export default function App () {
 
 
   return <div>
-    <Form getWeather={getWeather}/>
+    <Forma getWeather={getWeather}/>
     <Weather
       image={state.url} 
       icon={state.icon} 
