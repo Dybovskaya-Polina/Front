@@ -1,6 +1,6 @@
 class Api {
-    mykey = "wknd9Mybx73oyaPD0urLsS4vuaOJXM1qUv3VH3H0G-I"
-    key = 'd6564f2e962d531b593e00507465c9ea'
+    mykey = "-I"
+    key = ''
     
     async getWeather(city){
         const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.key}`);
